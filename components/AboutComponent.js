@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Text, ScrollView, FlatList } from 'react-native';
-import { ListItem } from 'react-native-elements';
-import { Card } from 'react-native-elements';
+import { ListItem, Card } from 'react-native-elements';
 import { PARTNERS } from '../shared/partners'
 
 function Mission() {
@@ -35,9 +34,7 @@ class About extends Component {
                     title={item.name}
                     subtitle={item.description}
                     leftAvatar={{ source: require('./images/bootstrap-logo.png')}}
-                >
-
-                </ListItem>
+                />
             );
         }
 
