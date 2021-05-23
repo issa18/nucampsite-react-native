@@ -142,6 +142,7 @@ export const addPartners = partners => ({
     payload: partners
 });
 
+//This is the Action Creator for Favorites.
 export const postFavorite = campsiteId => dispatch => {
     setTimeout(() => {
         dispatch(addFavorite(campsiteId));
@@ -150,6 +151,11 @@ export const postFavorite = campsiteId => dispatch => {
 
 export const addFavorite = campsiteId => ({
     type: ActionTypes.ADD_FAVORITE,
+    payload: campsiteId
+});
+
+export const deleteFavorite = campsiteId => ({
+    type: ActionTypes.DELETE_FAVORITE,
     payload: campsiteId
 });
 
