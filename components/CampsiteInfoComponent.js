@@ -25,7 +25,9 @@ function RenderCampsite(props) {
 
     const view = React.createRef();
 
-    const recognizeDrag = ({dx}) => (dx < -200) ? true : false;
+    const recognizeDragLeftToRight = ({dx}) => (dx < -200) ? true : false;
+
+    const recognizeCommentRightToLeft = ({dx}) => (dx > 200) ? true : false;
 
     const panResponder = PanResponder.create({
         onStartShouldSetPanResponder: () => true,
@@ -35,7 +37,7 @@ function RenderCampsite(props) {
         },
         onPanResponderEnd: (e, gestureState) => {
             console.log('pan responder end', gestureState);
-            if (recognizeDrag(gestureState)) {
+            if (recognizeDragLeftToRight(gestureState)) {
                 Alert.alert(
                     'Add Favorite',
                     'Are you sure you wish to add ' + campsite.name + ' to favorites?',
@@ -53,6 +55,8 @@ function RenderCampsite(props) {
                     ],
                     { cancelable: false }
                 );
+            }else if (recognizeCommentRightToLeft(gestureState)) {
+                return props.onShowModal();
             }
             return true;
         }
@@ -152,7 +156,7 @@ class CampsiteInfo extends Component {
         this.setState({showModal: !this.state.showModal});
     }
 
-    handleComment(campsiteId, rating, author, text) {
+    handleComment(campsiteId) {
         // console.log(JSON.stringify(this.state))
         this.props.postComment(campsiteId, this.state.rating, this.state.author, this.state.text);
     }

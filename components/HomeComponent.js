@@ -22,7 +22,9 @@ function RenderItem(props) {
 
     if(props.errMess) {
         return(
-            <View>{props.errMess}</View>
+            <View>
+                <Text>{props.errMess}</Text>
+            </View>
         );
     }
 
