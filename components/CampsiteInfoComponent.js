@@ -56,7 +56,7 @@ function RenderCampsite(props) {
                     { cancelable: false }
                 );
             }else if (recognizeCommentRightToLeft(gestureState)) {
-                return props.onShowModal();
+                props.onShowModal();
             }
             return true;
         }
@@ -178,6 +178,7 @@ class CampsiteInfo extends Component {
     handleComment(campsiteId) {
         // console.log(JSON.stringify(this.state))
         this.props.postComment(campsiteId, this.state.rating, this.state.author, this.state.text);
+        this.toggleModal();
     }
 
     resetForm() {
