@@ -16,7 +16,7 @@ import SafeAreaView from 'react-native-safe-area-view';
 import { connect } from 'react-redux';
 import { fetchCampsites, fetchComments, fetchPromotions,
     fetchPartners } from '../redux/ActionCreators';
-    import NetInfo from '@react-native-community/netinfo';
+import NetInfo from '@react-native-community/netinfo';
 
 const mapDispatchToProps = {
     fetchCampsites,
@@ -328,22 +328,34 @@ class Main extends Component {
         this.props.fetchPromotions();
         this.props.fetchPartners();
 
-        NetInfo.fetch().then(connectionInfo => {
+        this.showNetInfo();
+        //No longer need this. Its converted to a async/await. Leaving this here to see both examples and how they compare.
+        // NetInfo.fetch().then(connectionInfo => {
+        //     (Platform.OS === 'ios')
+        //         ? Alert.alert('Initial Network Connectivity Type:', connectionInfo.type)
+        //         : ToastAndroid.show('Initial Network Connectivity Type: ' +
+        //             connectionInfo.type, ToastAndroid.LONG);
+        // });
+
+        //Commented this out for testing purposes for async/await method.
+        // this.unsubscribeNetInfo = NetInfo.addEventListener(connectionInfo => {
+        //     this.handleConnectivityChange(connectionInfo)
+        // });
+    }
+
+    // componentWillUnmount() {
+    //     this.unsubscribeNetInfo();
+    // }
+
+    //switched NetInfo.fetch() from .then to a async method
+    showNetInfo = async () => {
+        const connectionInfo = await NetInfo.fetch();
             (Platform.OS === 'ios')
                 ? Alert.alert('Initial Network Connectivity Type:', connectionInfo.type)
                 : ToastAndroid.show('Initial Network Connectivity Type: ' +
                     connectionInfo.type, ToastAndroid.LONG);
-        });
-
-        this.unsubscribeNetInfo = NetInfo.addEventListener(connectionInfo => {
-            this.handleConnectivityChange(connectionInfo)
-        });
     }
-
-    componentWillUnmount() {
-        this.unsubscribeNetInfo();
-    }
-
+    
     handleConnectivityChange = connectionInfo => {
         let connectionMsg = 'You are now connected to an active network.';
         switch (connectionInfo.type) {
