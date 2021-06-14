@@ -4,8 +4,4 @@
 //mine
 // export const baseUrl = 'http://192.168.253.70:3001/';
 
-// export const baseUrl = 'http://192.168.216.70:3001/';
-
-// export const baseUrl = 'http://192.168.59.70:3001/';
-
-export const baseUrl = 'http://192.168.1.4:3001/';
+export const baseUrl = 'http://192.168.59.70:3001/';

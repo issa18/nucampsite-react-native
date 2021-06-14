@@ -337,15 +337,15 @@ class Main extends Component {
         //             connectionInfo.type, ToastAndroid.LONG);
         // });
 
-        //Commented this out for testing purposes for async/await method.
-        // this.unsubscribeNetInfo = NetInfo.addEventListener(connectionInfo => {
-        //     this.handleConnectivityChange(connectionInfo)
-        // });
+        
+        this.unsubscribeNetInfo = NetInfo.addEventListener(connectionInfo => {
+            this.handleConnectivityChange(connectionInfo);
+        });
     }
 
-    // componentWillUnmount() {
-    //     this.unsubscribeNetInfo();
-    // }
+    componentWillUnmount() {
+        this.unsubscribeNetInfo();
+    }
 
     //switched NetInfo.fetch() from .then to a async method
     showNetInfo = async () => {
